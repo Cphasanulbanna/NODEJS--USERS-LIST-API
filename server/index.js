@@ -6,36 +6,36 @@ const PORT = 8080;
 
 //USERSLIST DATA
 const users = [
-    "Hasanul Banna",
-    "Jinas",
-    "Akshay",
-    "Anshid",
-    "Ameen",
-    "Thabsheer",
-    "Shamil",
-    "Habeeb",
-    "jabir",
-    "Ramees",
-    "Faseen",
-    "Shijah",
+    { name: "Hasanul Banna" },
+    { name: "Jinas" },
+    { name: "Akshay" },
+    { name: "Anshid" },
+    { name: "Ameen" },
+    { name: "Thabsheer" },
+    { name: "Shamil" },
+    { name: "Habeeb" },
+    { name: "jabir" },
+    { name: "Ramees" },
+    { name: "Faseen" },
+    { name: "Shijah" },
 ];
 
 const server = http.createServer((req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+
     switch (req.url) {
         case "/":
             //REAADING HTML FILE
             fs.readFile("index.html", (err, data) => {
                 if (err) throw err;
                 res.writeHead(200, { "Content-Type": "text/html" });
-                res.write(data);
-                res.end();
+                res.end(data);
             });
             break;
 
         case "/users":
             res.writeHead(200, { "Content-Type": "text/plain" });
-            res.write(JSON.stringify(users));
-            res.end();
+            res.end(JSON.stringify(users));
             break;
 
         default:
